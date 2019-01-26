@@ -7,10 +7,6 @@
 
 #include "Main.hpp"
 
-#include "ox/oxygine.hpp"
-#include "ox/Stage.hpp"
-#include "ox/DebugActor.hpp"
-
 #include <memory>
 
 void run(std::shared_ptr<Game> game)
@@ -19,13 +15,11 @@ void run(std::shared_ptr<Game> game)
 	oxygine::core::init_desc desc;
 	desc.title = "Oxygine Application";
 
-	desc.w = 960;
-	desc.h = 640;
+	desc.w = game->size[0];
+	desc.h = game->size[1];
 
-	//game->preinit();
 	oxygine::core::init(&desc);
 
-	// Create the stage. Stage is a root node for all updateable and drawable objects
 	oxygine::Stage::instance = new oxygine::Stage();
 	oxygine::Point size = oxygine::core::getDisplaySize();
 	oxygine::getStage()->setSize(size);
@@ -58,7 +52,7 @@ void run(std::shared_ptr<Game> game)
 
 int main(const int, char const**)
 {
-	std::shared_ptr<Game> game = std::make_shared<Game>();
+	std::shared_ptr<Game> game = std::make_shared<Game>(800, 800);
 	run(game);
 	return 0;
 }

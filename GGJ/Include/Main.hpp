@@ -9,3 +9,4 @@
 
 #include "Game.hpp"
 #include "MapCreator.hpp"
+#include "Oxygine.hpp"

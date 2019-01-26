@@ -15,14 +15,12 @@ struct MapPreset;
 #include <vector>
 
 enum MAP_TILE : uint16_t {
-	NONE,
 	GRASS,
 	HOUSE,
-	BURNING_HOUSE,
-	BURNED_HOUSE,
+	BURNING_HOUSE
 };
 
-enum XY : uint16_t {
+enum XY : uint8_t {
 	X,
 	Y,
 	XY_SIZE
@@ -44,4 +42,3 @@ class MapCreator
 		std::shared_ptr<MapPreset> randomMap();
 		std::shared_ptr<MapPreset> map1();
 };
-
