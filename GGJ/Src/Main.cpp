@@ -11,15 +11,9 @@
 #include "ox/Stage.hpp"
 #include "ox/DebugActor.hpp"
 
-Main::Main()
-{
-}
+#include <memory>
 
-Main::~Main()
-{
-}
-
-void run()
+void run(std::shared_ptr<Game> game)
 {
 	oxygine::ObjectBase::__startTracingLeaks();
 	oxygine::core::init_desc desc;
@@ -28,7 +22,7 @@ void run()
 	desc.w = 960;
 	desc.h = 640;
 
-	//example_preinit();
+	//game->preinit();
 	oxygine::core::init(&desc);
 
 	// Create the stage. Stage is a root node for all updateable and drawable objects
@@ -38,12 +32,12 @@ void run()
 
 	oxygine::DebugActor::show();
 
-	//example_init();
+	game->init();
 	bool done = false;
 	while (done == false)
-	 {
+	{
 		done = oxygine::core::update();
-		//example_update();
+		game->update();
 		oxygine::getStage()->update();
 
 		if (oxygine::core::beginRendering())
@@ -55,7 +49,7 @@ void run()
 		}
 	}
 	oxygine::ObjectBase::dumpCreatedObjects();
-	//example_destroy();
+	game->destroy();
 	//renderer.cleanup();
 	oxygine::core::release();
 	oxygine::ObjectBase::dumpCreatedObjects();
@@ -64,6 +58,7 @@ void run()
 
 int main(const int, char const**)
 {
-	run();
+	std::shared_ptr<Game> game = std::make_shared<Game>();
+	run(game);
 	return 0;
 }

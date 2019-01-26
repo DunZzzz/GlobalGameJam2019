@@ -7,12 +7,5 @@
 
 #pragma once
 
-class Main;
-
-class Main
-{
-	public:
-		Main();
-		virtual ~Main();
-};
-
+#include "Game.hpp"
+#include "MapCreator.hpp"
