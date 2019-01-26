@@ -10,7 +10,8 @@
 Grass::Grass(Game *game, uint16_t *xy)
 	: Indestructible(game, xy)
 {
-	sprite->setColor(ox::Color(52, 121, 44, 255));
+	//sprite->setColor(ox::Color(52, 121, 44, 255));
+	attachImg("./assets/landscapeTiles_067.png");
 }
 
 Grass::~Grass()

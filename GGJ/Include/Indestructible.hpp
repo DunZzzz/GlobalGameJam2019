@@ -11,7 +11,6 @@ class Indestructible;
 class Tiles;
 
 #include "Tiles.hpp"
-#include "Oxygine.hpp"
 
 class Indestructible : public Tiles
 {
@@ -21,8 +20,5 @@ class Indestructible : public Tiles
 	void setNextType(const MAP_TILE &);
 	void update();
 	void event(ox::Event *evt);
-
-	protected:
-	ox::spSprite sprite;
 };
 

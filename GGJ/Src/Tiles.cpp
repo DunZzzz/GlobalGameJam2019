@@ -6,10 +6,46 @@
  */
 
 #include "Tiles.hpp"
+#include "Game.hpp"
 
+#include <iostream>
 Tiles::Tiles(Game *game, uint16_t *xy, MAP_TILE type)
 	: game(game) , xy{xy[X], xy[Y]} , type(type), nextType(NONE)
 {
+	float pos[XY_SIZE];
+	float size[XY_SIZE];
+
+
+	size[X] = 66;
+	size[Y] = 66;
+	//size[Y] = ((float)game->size[Y] / (float)game->mapPreset->xy[Y]);
+	std::cout << "size[X]" << size[X] << std::endl;
+	pos[X] = size[X] * xy[X];
+	pos[Y] = size[Y] * xy[Y];
+
+	// ISOMETRIC VIEW
+
+	float tmpPos[XY_SIZE];
+	tmpPos[X] = pos[X] - pos[Y];
+	tmpPos[Y] = (pos[X] + pos[Y]) / 2;
+
+	pos[X] = tmpPos[X] - size[X] + game->size[X] / 2;
+	pos[Y] = tmpPos[Y] - size[Y] + game->size[Y] / 2;
+
+	// END -- ISOMETRIC VIEW
+
+	sprite = new ox::Sprite();
+	sprite->setPosition(pos[X], pos[Y]);
+	sprite->setSize(size[X], size[Y]);
+	sprite->attachTo(ox::getStage());
+}
+
+void Tiles::attachImg(const std::string &path)
+{
+	ox::SingleResAnim *img = new ox::SingleResAnim();
+
+	img->init(path);
+	sprite->setResAnim(img);
 }
 
 void Tiles::flush()

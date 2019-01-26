@@ -45,6 +45,15 @@ void Game::round()
 
 void Game::init()
 {
+	ox::SingleResAnim *img = new ox::SingleResAnim();
+	img->init("./assets/sky1.png");
+
+	ox::spSprite bg = new ox::Sprite();
+	bg->setPosition(0, 0);
+	bg->setSize(size[X], size[Y]);
+	bg->setResAnim(img);
+	bg->attachTo(ox::getStage());
+
 	mapPreset = mapCreator->randomMap();
 	currentMap = createMap(mapPreset);
 	clock = ox::getStage()->getClock();
@@ -96,7 +105,7 @@ void Game::termPrintMap()
 
 void Game::update()
 {
-	if ((clock->getTime() - last) > 20) {
+	if ((clock->getTime() - last) > 800) {
 		last = clock->getTime();
 		round();
 	}

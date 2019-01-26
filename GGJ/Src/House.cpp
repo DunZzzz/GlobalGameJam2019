@@ -14,17 +14,6 @@
 House::House(Game *game, uint16_t *xy)
 	: Tiles(game, xy, HOUSE)
 {
-	float pos[XY_SIZE];
-	float size[XY_SIZE];
-
-	size[X] = ((float)game->size[X] / (float)game->mapPreset->xy[X]);
-	size[Y] = ((float)game->size[Y] / (float)game->mapPreset->xy[Y]);
-	pos[X] = size[X] * xy[X];
-	pos[Y] = size[Y] * xy[Y];
-	sprite = new ox::ColorRectSprite;
-	sprite->setPosition(pos[X], pos[Y]);
-	sprite->setSize(size[X], size[Y]);
-	sprite->attachTo(ox::getStage()); 
 	redrawSprite();
 	ox::spActor target = sprite;
 	target->addEventListener(ox::TouchEvent::CLICK, CLOSURE(this, &House::event));
@@ -88,19 +77,24 @@ void House::redrawSprite()
 {
 	switch (type) {
 		case HOUSE:
-			sprite->setColor(ox::Color(87, 81, 109, 255));
+			attachImg("./assets/buildingTiles_022.png");
+			//sprite->setColor(ox::Color(87, 81, 109, 255));
 			break;
 		case BURNING_HOUSE:
-			sprite->setColor(ox::Color(229, 21, 17, 255));
+			attachImg("./assets/buildingTiles_001.png");
+			//sprite->setColor(ox::Color(229, 21, 17, 255));
 			break;
 		case BURNED_HOUSE:
-			sprite->setColor(ox::Color(32, 32, 32, 255));
+			attachImg("./assets/buildingTiles_101.png");
+			//sprite->setColor(ox::Color(32, 32, 32, 255));
 			break;
 		case GRASS:
-			sprite->setColor(ox::Color(22, 92, 21, 255));
+			attachImg("./assets/buildingTiles_067.png");
+			//sprite->setColor(ox::Color(22, 92, 21, 255));
 			break;
 		default:
-			sprite->setColor(ox::Color(255, 255, 255, 255));
+			attachImg("./assets/buildingTiles_066.png");
+			//sprite->setColor(ox::Color(255, 255, 255, 255));
 			break;
 	}
 }

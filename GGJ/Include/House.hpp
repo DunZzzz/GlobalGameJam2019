@@ -11,21 +11,19 @@ class House;
 class Tiles;
 
 #include "Tiles.hpp"
-#include "Oxygine.hpp"
 
 class House : public Tiles
 {
 	public:
-	House(Game *, uint16_t *);
-	virtual ~House();
-	static Tiles *create(Game *, uint16_t *);
-	void setNextType(const MAP_TILE &);
-	void update();
-	void event(ox::Event *evt);
-	void flush();
+		House(Game *, uint16_t *);
+		virtual ~House();
+		static Tiles *create(Game *, uint16_t *);
+		void setNextType(const MAP_TILE &);
+		void update();
+		void event(ox::Event *evt);
+		void flush();
 
 	private:
-	ox::spSprite sprite;
-	void redrawSprite();
+		void redrawSprite();
 };
 

@@ -11,6 +11,7 @@ class Tiles;
 class Game;
 
 #include "MapCreator.hpp"
+#include "Oxygine.hpp"
 
 #include <stdint.h>
 #include <memory>
@@ -23,6 +24,7 @@ class Tiles
 		virtual void setNextType(const MAP_TILE &) = 0;
 		virtual void update() = 0;
 		virtual void flush();
+		void attachImg(const std::string &img);
 
 		MAP_TILE type;
 
@@ -30,5 +32,6 @@ class Tiles
 		MAP_TILE nextType;
 		Game *game;
 		uint16_t xy[2];
+		ox::spSprite sprite;
 };
 
