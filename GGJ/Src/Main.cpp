@@ -11,43 +11,43 @@
 
 void run(std::shared_ptr<Game> game)
 {
-	oxygine::ObjectBase::__startTracingLeaks();
-	oxygine::core::init_desc desc;
+	ox::ObjectBase::__startTracingLeaks();
+	ox::core::init_desc desc;
 	desc.title = "Oxygine Application";
 
 	desc.w = game->size[0];
 	desc.h = game->size[1];
 
-	oxygine::core::init(&desc);
+	ox::core::init(&desc);
 
-	oxygine::Stage::instance = new oxygine::Stage();
-	oxygine::Point size = oxygine::core::getDisplaySize();
-	oxygine::getStage()->setSize(size);
+	ox::Stage::instance = new ox::Stage();
+	ox::Point size = ox::core::getDisplaySize();
+	ox::getStage()->setSize(size);
 
-	oxygine::DebugActor::show();
+	ox::DebugActor::show();
 
 	game->init();
 	bool done = false;
 	while (done == false)
 	{
-		done = oxygine::core::update();
+		done = ox::core::update();
 		game->update();
-		oxygine::getStage()->update();
+		ox::getStage()->update();
 
-		if (oxygine::core::beginRendering())
+		if (ox::core::beginRendering())
 		{
-			oxygine::Color clearColor(32, 32, 32, 255);
-			oxygine::Rect viewport(oxygine::Point(0, 0), oxygine::core::getDisplaySize());
-			oxygine::getStage()->render(clearColor, viewport);
-			oxygine::core::swapDisplayBuffers();
+			ox::Color clearColor(32, 32, 32, 255);
+			ox::Rect viewport(ox::Point(0, 0), ox::core::getDisplaySize());
+			ox::getStage()->render(clearColor, viewport);
+			ox::core::swapDisplayBuffers();
 		}
 	}
-	oxygine::ObjectBase::dumpCreatedObjects();
+	ox::ObjectBase::dumpCreatedObjects();
 	game->destroy();
 	//renderer.cleanup();
-	oxygine::core::release();
-	oxygine::ObjectBase::dumpCreatedObjects();
-	oxygine::ObjectBase::__stopTracingLeaks();
+	ox::core::release();
+	ox::ObjectBase::dumpCreatedObjects();
+	ox::ObjectBase::__stopTracingLeaks();
 }
 
 int main(const int, char const**)

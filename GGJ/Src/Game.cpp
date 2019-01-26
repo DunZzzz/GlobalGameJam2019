@@ -21,7 +21,7 @@ Game::Game(uint16_t x, uint16_t y)
 	srand(time(nullptr));
 	tilesCreator = {
 		{HOUSE, &House::create},
-		{GRASS, &House::create},
+		{GRASS, &Grass::create},
 	};
 }
 
@@ -47,8 +47,8 @@ void Game::init()
 {
 	mapPreset = mapCreator->randomMap();
 	currentMap = createMap(mapPreset);
-	clock = oxygine::getStage()->getClock();
-	oxygine::timeMS last;
+	clock = ox::getStage()->getClock();
+	ox::timeMS last;
 }
 
 Tiles *Game::createTile(MAP_TILE type, uint16_t *xy) {
@@ -99,7 +99,6 @@ void Game::update()
 	if ((clock->getTime() - last) > 20) {
 		last = clock->getTime();
 		round();
-		std::cout << clock->getTime() << std::endl;
 	}
 }
 //termPrintMap();

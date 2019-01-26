@@ -15,6 +15,7 @@ struct MapPreset;
 #include "MapCreator.hpp"
 #include "Tiles.hpp"
 #include "House.hpp"
+#include "Grass.hpp"
 #include "Oxygine.hpp"
 
 #include <memory>
@@ -39,9 +40,9 @@ class Game
 		void termPrintMap();
 
 	public:
-		oxygine::spClock clock;
+		ox::spClock clock;
 		Map currentMap;
-		oxygine::timeMS last;
+		ox::timeMS last;
 		std::shared_ptr<MapPreset> mapPreset;
 		std::shared_ptr<MapCreator> mapCreator;
 		std::unordered_map<MAP_TILE, Tiles *(*)(Game *, uint16_t *)> tilesCreator;

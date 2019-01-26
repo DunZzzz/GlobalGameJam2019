@@ -1,5 +1,5 @@
 /*
- * House.hpp
+ * Indestructible.hpp
  * Copyright (C) 2019 emilien <emilien@emilien-pc>
  *
  * Distributed under terms of the MIT license.
@@ -7,25 +7,22 @@
 
 #pragma once
 
-class House;
+class Indestructible;
 class Tiles;
 
 #include "Tiles.hpp"
 #include "Oxygine.hpp"
 
-class House : public Tiles
+class Indestructible : public Tiles
 {
 	public:
-	House(Game *, uint16_t *);
-	virtual ~House();
-	static Tiles *create(Game *, uint16_t *);
+	Indestructible(Game *, uint16_t *);
+	virtual ~Indestructible();
 	void setNextType(const MAP_TILE &);
 	void update();
 	void event(ox::Event *evt);
-	void flush();
 
-	private:
+	protected:
 	ox::spSprite sprite;
-	void redrawSprite();
 };
 

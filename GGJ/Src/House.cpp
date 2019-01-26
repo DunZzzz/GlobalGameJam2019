@@ -21,20 +21,20 @@ House::House(Game *game, uint16_t *xy)
 	size[Y] = ((float)game->size[Y] / (float)game->mapPreset->xy[Y]);
 	pos[X] = size[X] * xy[X];
 	pos[Y] = size[Y] * xy[Y];
-	sprite = new oxygine::ColorRectSprite;
+	sprite = new ox::ColorRectSprite;
 	sprite->setPosition(pos[X], pos[Y]);
 	sprite->setSize(size[X], size[Y]);
-	sprite->attachTo(oxygine::getStage()); 
+	sprite->attachTo(ox::getStage()); 
 	redrawSprite();
-	oxygine::spActor target = sprite;
-	target->addEventListener(oxygine::TouchEvent::CLICK, CLOSURE(this, &House::event));
+	ox::spActor target = sprite;
+	target->addEventListener(ox::TouchEvent::CLICK, CLOSURE(this, &House::event));
 }
 
-void House::event(oxygine::Event *evt)
+void House::event(ox::Event *evt)
 {
-	oxygine::TouchEvent* te = oxygine::safeCast<oxygine::TouchEvent*>(evt);
+	ox::TouchEvent* te = ox::safeCast<ox::TouchEvent*>(evt);
 
-	if (te->type == oxygine::TouchEvent::CLICK)
+	if (te->type == ox::TouchEvent::CLICK)
 		setNextType(BURNING_HOUSE);
 }
 
@@ -88,19 +88,19 @@ void House::redrawSprite()
 {
 	switch (type) {
 		case HOUSE:
-			sprite->setColor(oxygine::Color(57, 64, 80, 255));
+			sprite->setColor(ox::Color(87, 81, 109, 255));
 			break;
 		case BURNING_HOUSE:
-			sprite->setColor(oxygine::Color(229, 21, 17, 255));
+			sprite->setColor(ox::Color(229, 21, 17, 255));
 			break;
 		case BURNED_HOUSE:
-			sprite->setColor(oxygine::Color(32, 32, 32, 255));
+			sprite->setColor(ox::Color(32, 32, 32, 255));
 			break;
 		case GRASS:
-			sprite->setColor(oxygine::Color(22, 92, 21, 255));
+			sprite->setColor(ox::Color(22, 92, 21, 255));
 			break;
 		default:
-			sprite->setColor(oxygine::Color(255, 255, 255, 255));
+			sprite->setColor(ox::Color(255, 255, 255, 255));
 			break;
 	}
 }
