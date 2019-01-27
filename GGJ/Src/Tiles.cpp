@@ -12,10 +12,6 @@
 Tiles::Tiles(Game *game, uint16_t *xy, MAP_TILE type)
 	: game(game) , xy{xy[X], xy[Y]} , type(type), nextType(NONE)
 {
-	float pos[XY_SIZE];
-	float size[XY_SIZE];
-
-
 	size[X] = 66;
 	size[Y] = 66;
 	//size[Y] = ((float)game->size[Y] / (float)game->mapPreset->xy[Y]);
@@ -45,6 +41,7 @@ void Tiles::attachImg(const std::string &path)
 	ox::SingleResAnim *img = new ox::SingleResAnim();
 
 	img->init(path);
+	sprite->setPosition(pos[X], pos[Y] - img->getHeight());
 	sprite->setResAnim(img);
 }
 

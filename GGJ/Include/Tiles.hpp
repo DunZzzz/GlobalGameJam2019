@@ -31,7 +31,9 @@ class Tiles
 	protected:
 		MAP_TILE nextType;
 		Game *game;
-		uint16_t xy[2];
+		uint16_t xy[XY_SIZE];
 		ox::spSprite sprite;
+		float pos[XY_SIZE];
+		float size[XY_SIZE];
 };
 
