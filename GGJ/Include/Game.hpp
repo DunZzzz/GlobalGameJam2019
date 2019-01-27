@@ -32,17 +32,21 @@ class Game
 		Game(uint16_t x, uint16_t y);
 		virtual ~Game();
 		void init();
+		void initGame();
 		void update();
+		void setMenu();
 		void destroy();
 		Tiles *createTile(MAP_TILE type, uint16_t *xy);
 		Map createMap(std::shared_ptr<MapPreset>);
 		void round();
+		void buttonClicked(ox::Event*);
 
 	private:
 		void draw();
 		void termPrintMap();
 
 	public:
+		ox::spSprite menu;
 		ox::spClock clock;
 		Map currentMap;
 		ox::timeMS last;

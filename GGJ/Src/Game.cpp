@@ -15,6 +15,7 @@
 
 Game::Game(uint16_t x, uint16_t y)
 	: mapCreator(std::make_shared<MapCreator>())
+	  , menu(nullptr)
 {
 	size[0] = x;
 	size[1] = y;
@@ -34,6 +35,8 @@ Game::~Game()
 
 void Game::round()
 {
+	bool burningHouse = false;
+	bool burnedHouse = false;
 	for (auto it1 : currentMap) {
 		for (auto it2 : it1) {
 			it2->update();
@@ -42,11 +45,42 @@ void Game::round()
 	for (auto it1 : currentMap) {
 		for (auto it2 : it1) {
 			it2->flush();
+			if (it2->type == BURNED_HOUSE)
+				burnedHouse = true;
+			if (it2->type == BURNING_HOUSE)
+				burningHouse = true;
 		}
+	}
+	if (burnedHouse == true && burningHouse == false) {
+		menu->attachTo(ox::getStage());
+		menu->setVisible(true);
 	}
 }
 
-void Game::init()
+void Game::buttonClicked(ox::Event*) {
+	menu->detach();
+	initGame();
+}
+
+void Game::setMenu()
+{
+	menu = new ox::ColorRectSprite;
+	menu->setPosition(0, 0);
+	menu->setSize(size[X], size[Y]);
+	menu->setColor(ox::Color(27,27,27,190));
+
+	ox::SingleResAnim *img = new ox::SingleResAnim();
+	img->init("./assets/NEW.png");
+
+	ox::spSprite button = new ox::Sprite();
+	button->setPosition(size[X] / 2 - img->getWidth() / 2, size[Y] / 2 - img->getHeight() / 2);
+	button->setSize(img->getWidth(), img->getHeight());
+	button->setResAnim(img);
+	button->attachTo(menu);
+	button->addEventListener(ox::TouchEvent::CLICK, CLOSURE(this, &Game::buttonClicked));
+}
+
+void Game::init() 
 {
 	ox::SingleResAnim *img = new ox::SingleResAnim();
 	img->init("./assets/sky1.png");
@@ -56,11 +90,15 @@ void Game::init()
 	bg->setSize(size[X], size[Y]);
 	bg->setResAnim(img);
 	bg->attachTo(ox::getStage());
+	initGame();
+	setMenu();
+}
 
+void Game::initGame()
+{
 	mapPreset = mapCreator->randomMap();
 	currentMap = createMap(mapPreset);
 	clock = ox::getStage()->getClock();
-	ox::timeMS last;
 }
 
 Tiles *Game::createTile(MAP_TILE type, uint16_t *xy) {

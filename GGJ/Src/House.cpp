@@ -23,7 +23,13 @@ void House::event(ox::Event *evt)
 {
 	ox::TouchEvent* te = ox::safeCast<ox::TouchEvent*>(evt);
 
-	if (te->type == ox::TouchEvent::CLICK) {
+	if (te->type == ox::TouchEvent::CLICK && type == HOUSE) {
+		for (auto it1 : game->currentMap) {
+			for (auto it2 : it1) {
+				if (it2->type == BURNING_HOUSE)
+					return;
+			}
+		}
 		flamePower = 100;
 		setNextType(BURNING_HOUSE);
 	}
