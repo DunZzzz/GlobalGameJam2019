@@ -27,6 +27,7 @@ class Tiles
 		void attachImg(const std::string &img);
 
 		MAP_TILE type;
+		int16_t flamePower;
 
 	protected:
 		MAP_TILE nextType;

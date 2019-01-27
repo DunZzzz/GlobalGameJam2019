@@ -10,7 +10,7 @@
 
 #include <iostream>
 Tiles::Tiles(Game *game, uint16_t *xy, MAP_TILE type)
-	: game(game) , xy{xy[X], xy[Y]} , type(type), nextType(NONE)
+	: game(game) , xy{xy[X], xy[Y]} , type(type), nextType(NONE), flamePower(0)
 {
 	size[X] = 64;
 	size[Y] = 64;

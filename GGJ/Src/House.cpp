@@ -23,8 +23,10 @@ void House::event(ox::Event *evt)
 {
 	ox::TouchEvent* te = ox::safeCast<ox::TouchEvent*>(evt);
 
-	if (te->type == ox::TouchEvent::CLICK)
+	if (te->type == ox::TouchEvent::CLICK) {
+		flamePower = 100;
 		setNextType(BURNING_HOUSE);
+	}
 }
 
 
@@ -37,40 +39,40 @@ void House::update()
 	int tmp = 0;
 
 	if (xy[X] > 0 && game->currentMap.at(xy[X] - 1).at(xy[Y])->type == BURNING_HOUSE)
-		tmp++;
+		tmp += game->currentMap.at(xy[X] - 1).at(xy[Y])->flamePower;
 	if (xy[Y] > 0 && game->currentMap.at(xy[X]).at(xy[Y] - 1)->type == BURNING_HOUSE)
-		tmp++;
-
+		tmp += game->currentMap.at(xy[X]).at(xy[Y] - 1)->flamePower;
 	if ((xy[X] + 1) < game->mapPreset->xy[X] && game->currentMap.at(xy[X] + 1).at(xy[Y])->type == BURNING_HOUSE)
-		tmp++;
+		tmp += game->currentMap.at(xy[X] + 1).at(xy[Y])->flamePower;
 	if ((xy[Y] + 1) < game->mapPreset->xy[Y] && game->currentMap.at(xy[X]).at(xy[Y] + 1)->type == BURNING_HOUSE)
-		tmp++;
-	switch (tmp) {
-		case 0:
-			if (type == BURNING_HOUSE)
+		tmp += game->currentMap.at(xy[X]).at(xy[Y] + 1)->flamePower;
+
+	if (tmp < 3) {
+		if (type == BURNING_HOUSE) {
+			flamePower -= 2;
+			if (flamePower <= 0)
 				setNextType(BURNED_HOUSE);
-			//if (type == BURNED_HOUSE)
-				//setNextType(HOUSE);
-			break;
-		case 1:
-			if (type == BURNING_HOUSE)
+		}
+	} else if (tmp < 6) {
+		if (type == BURNING_HOUSE) {
+			flamePower--;
+			if (flamePower <= 0)
 				setNextType(BURNED_HOUSE);
-			if (type == HOUSE)
-				setNextType(BURNING_HOUSE);
-			break;
-		case 2:
-			if (type == HOUSE)
-				setNextType(BURNING_HOUSE);
-			break;
-		case 3:
-			if (type == BURNING_HOUSE)
-				setNextType(BURNED_HOUSE);
-			else
-				setNextType(BURNING_HOUSE);
-			break;
-		default:
-			break;
+		}
+	} else if (tmp < 9) {
+		if (type == HOUSE) {
+			flamePower = (float)tmp * 0.6f;
+			setNextType(BURNING_HOUSE);
+		}
+	} else {
+		if (type == BURNING_HOUSE)
+			setNextType(BURNED_HOUSE);
+		else if (type != BURNED_HOUSE) {
+			flamePower = (float)tmp * 0.6f;
+			setNextType(BURNING_HOUSE);
+		}
 	}
+	flamePower--;
 }
 
 void House::redrawSprite()
