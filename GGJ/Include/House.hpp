@@ -25,5 +25,6 @@ class House : public Tiles
 
 	private:
 		void redrawSprite();
+		int16_t nextFlamePower;
 };
 

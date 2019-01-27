@@ -47,32 +47,27 @@ void House::update()
 	if ((xy[Y] + 1) < game->mapPreset->xy[Y] && game->currentMap.at(xy[X]).at(xy[Y] + 1)->type == BURNING_HOUSE)
 		tmp += game->currentMap.at(xy[X]).at(xy[Y] + 1)->flamePower;
 
-	if (tmp < 3) {
+	nextFlamePower = flamePower;
+	if (tmp < 50) {
 		if (type == BURNING_HOUSE) {
-			flamePower -= 2;
-			if (flamePower <= 0)
-				setNextType(BURNED_HOUSE);
-		}
-	} else if (tmp < 6) {
-		if (type == BURNING_HOUSE) {
-			flamePower--;
-			if (flamePower <= 0)
-				setNextType(BURNED_HOUSE);
-		}
-	} else if (tmp < 9) {
-		if (type == HOUSE) {
-			flamePower = (float)tmp * 0.6f;
-			setNextType(BURNING_HOUSE);
+			nextFlamePower *= 0.2f;
 		}
 	} else {
 		if (type == BURNING_HOUSE)
-			setNextType(BURNED_HOUSE);
-		else if (type != BURNED_HOUSE) {
-			flamePower = (float)tmp * 0.6f;
+			nextFlamePower *= 0.4f;
+	}
+	if ((int16_t)((float)tmp * 0.4f) > 0) {
+		std::cout << "tmp:" << tmp << std::endl;
+		if (type == HOUSE) {
+			nextFlamePower = (float)tmp * 0.5f;
 			setNextType(BURNING_HOUSE);
 		}
 	}
-	flamePower--;
+	nextFlamePower--;
+	if (nextFlamePower < 0)
+		nextFlamePower = 0;
+	if (type == BURNING_HOUSE && nextFlamePower == 0)
+		setNextType(BURNED_HOUSE);
 }
 
 void House::redrawSprite()
@@ -98,6 +93,12 @@ void House::flush()
 		type = nextType;
 		nextType = NONE;
 		redrawSprite();
+	}
+	if (nextFlamePower < 0 || type != BURNING_HOUSE) {
+		flamePower = 0;
+	} else if (nextFlamePower > 0) {
+		flamePower = nextFlamePower;
+		std::cout << "xy: " << pos[X] << " " << pos[Y] << "Flame: " << flamePower << std::endl;
 	}
 }
 
