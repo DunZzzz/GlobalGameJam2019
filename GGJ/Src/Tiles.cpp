@@ -9,6 +9,7 @@
 #include "Game.hpp"
 
 #include <iostream>
+
 Tiles::Tiles(Game *game, uint16_t *xy, MAP_TILE type)
 	: game(game) , xy{xy[X], xy[Y]} , type(type), nextType(NONE), flamePower(0)
 {
@@ -55,4 +56,5 @@ void Tiles::flush()
 
 Tiles::~Tiles()
 {
+	sprite->detach();
 }

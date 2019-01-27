@@ -59,6 +59,11 @@ void Game::round()
 
 void Game::buttonClicked(ox::Event*) {
 	menu->detach();
+	for (auto it1 : currentMap) {
+		for (auto it2 : it1) {
+			delete it2;
+		}
+	}
 	initGame();
 }
 

@@ -21,7 +21,8 @@ std::shared_ptr<MapPreset> MapCreator::randomMap()
 {
 	std::vector<std::shared_ptr<MapPreset> (MapCreator::*)()> pool = {
 		&MapCreator::map1,
-		//		&MapCreator::map2,
+		&MapCreator::map2,
+		&MapCreator::map3,
 	};
 
 	return ((*this).*(pool.at(rand() % pool.size())))();
