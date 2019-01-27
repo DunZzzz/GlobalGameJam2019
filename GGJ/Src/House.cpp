@@ -49,8 +49,8 @@ void House::update()
 		case 0:
 			if (type == BURNING_HOUSE)
 				setNextType(BURNED_HOUSE);
-			if (type == BURNED_HOUSE)
-				setNextType(HOUSE);
+			//if (type == BURNED_HOUSE)
+				//setNextType(HOUSE);
 			break;
 		case 1:
 			if (type == BURNING_HOUSE)
@@ -78,23 +78,14 @@ void House::redrawSprite()
 	switch (type) {
 		case HOUSE:
 			attachImg("./assets/buildingTiles_022.png");
-			//sprite->setColor(ox::Color(87, 81, 109, 255));
 			break;
 		case BURNING_HOUSE:
-			attachImg("./assets/buildingTiles_001.png");
-			//sprite->setColor(ox::Color(229, 21, 17, 255));
+			attachImg("./assets/buildingTiles_022_burning.png");
 			break;
 		case BURNED_HOUSE:
-			attachImg("./assets/buildingTiles_101.png");
-			//sprite->setColor(ox::Color(32, 32, 32, 255));
-			break;
-		case GRASS:
-			attachImg("./assets/buildingTiles_067.png");
-			//sprite->setColor(ox::Color(22, 92, 21, 255));
+			attachImg("./assets/buildingTiles_022_burned.png");
 			break;
 		default:
-			attachImg("./assets/buildingTiles_066.png");
-			//sprite->setColor(ox::Color(255, 255, 255, 255));
 			break;
 	}
 }

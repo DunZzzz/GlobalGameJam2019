@@ -17,7 +17,9 @@ struct MapPreset;
 enum MAP_TILE : uint16_t {
 	NONE,
 	GRASS,
+	WATER,
 	HOUSE,
+	ROAD,
 	BURNING_HOUSE,
 	BURNED_HOUSE,
 };

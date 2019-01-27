@@ -1,25 +1,25 @@
 /*
- * Grass.cpp
+ * Water.cpp
  * Copyright (C) 2019 emilien <emilien@emilien-pc>
  *
  * Distributed under terms of the MIT license.
  */
 
-#include "Grass.hpp"
+#include "Water.hpp"
 
-Grass::Grass(Game *game, uint16_t *xy)
+Water::Water(Game *game, uint16_t *xy)
 	: Indestructible(game, xy)
 {
-	attachImg("./assets/landscapeTiles_067.png");
+	attachImg("./assets/landscapeTiles_066.png");
 }
 
-Grass::~Grass()
+Water::~Water()
 {
 }
 
-Tiles *Grass::create(Game *game, uint16_t *xy)
+Tiles *Water::create(Game *game, uint16_t *xy)
 {
-	Grass *tile = new Grass(game, xy);
+	Water *tile = new Water(game, xy);
 
 	if (tile == nullptr)
 		throw err::excep("Out of Memory.");

@@ -22,6 +22,9 @@ Game::Game(uint16_t x, uint16_t y)
 	tilesCreator = {
 		{HOUSE, &House::create},
 		{GRASS, &Grass::create},
+		{ROAD, &City::create},
+		{NONE, &None::create},
+		{WATER, &Water::create},
 	};
 }
 
@@ -105,7 +108,7 @@ void Game::termPrintMap()
 
 void Game::update()
 {
-	if ((clock->getTime() - last) > 800) {
+	if ((clock->getTime() - last) > 500) {
 		last = clock->getTime();
 		round();
 	}

@@ -16,6 +16,9 @@ struct MapPreset;
 #include "Tiles.hpp"
 #include "House.hpp"
 #include "Grass.hpp"
+#include "Water.hpp"
+#include "City.hpp"
+#include "None.hpp"
 #include "Oxygine.hpp"
 
 #include <memory>

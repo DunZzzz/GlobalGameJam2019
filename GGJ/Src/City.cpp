@@ -1,25 +1,25 @@
 /*
- * Grass.cpp
+ * City.cpp
  * Copyright (C) 2019 emilien <emilien@emilien-pc>
  *
  * Distributed under terms of the MIT license.
  */
 
-#include "Grass.hpp"
+#include "City.hpp"
 
-Grass::Grass(Game *game, uint16_t *xy)
+City::City(Game *game, uint16_t *xy)
 	: Indestructible(game, xy)
 {
-	attachImg("./assets/landscapeTiles_067.png");
+	attachImg("./assets/cityTiles_080.png");
 }
 
-Grass::~Grass()
+City::~City()
 {
 }
 
-Tiles *Grass::create(Game *game, uint16_t *xy)
+Tiles *City::create(Game *game, uint16_t *xy)
 {
-	Grass *tile = new Grass(game, xy);
+	City *tile = new City(game, xy);
 
 	if (tile == nullptr)
 		throw err::excep("Out of Memory.");
