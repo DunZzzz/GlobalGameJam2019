@@ -45,5 +45,6 @@ class MapCreator
 
 		std::shared_ptr<MapPreset> randomMap();
 		std::shared_ptr<MapPreset> map1();
+		std::shared_ptr<MapPreset> map2();
 };
 
