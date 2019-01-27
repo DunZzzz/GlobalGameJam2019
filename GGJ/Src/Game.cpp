@@ -108,7 +108,7 @@ void Game::termPrintMap()
 
 void Game::update()
 {
-	if ((clock->getTime() - last) > 500) {
+	if ((clock->getTime() - last) > 300) {
 		last = clock->getTime();
 		round();
 	}
