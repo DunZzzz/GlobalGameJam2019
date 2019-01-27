@@ -48,11 +48,13 @@ class Game
 	public:
 		ox::spSprite menu;
 		ox::spClock clock;
+		ox::spTextField pointsTxt;
 		Map currentMap;
 		ox::timeMS last;
 		std::shared_ptr<MapPreset> mapPreset;
 		std::shared_ptr<MapCreator> mapCreator;
 		std::unordered_map<MAP_TILE, Tiles *(*)(Game *, uint16_t *)> tilesCreator;
 		uint16_t size[2];
+		uint32_t points;
 };
 

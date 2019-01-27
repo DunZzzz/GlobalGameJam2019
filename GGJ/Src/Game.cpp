@@ -15,7 +15,8 @@
 
 Game::Game(uint16_t x, uint16_t y)
 	: mapCreator(std::make_shared<MapCreator>())
-	  , menu(nullptr)
+	, menu(nullptr)
+	  , points(0)
 {
 	size[0] = x;
 	size[1] = y;
