@@ -63,7 +63,6 @@ void House::update()
 			nextFlamePower *= 0.4f;
 	}
 	if ((int16_t)((float)tmp * 0.4f) > 0) {
-		std::cout << "tmp:" << tmp << std::endl;
 		if (type == HOUSE) {
 			nextFlamePower = (float)tmp * 0.5f;
 			setNextType(BURNING_HOUSE);
@@ -102,10 +101,8 @@ void House::flush()
 	}
 	if (nextFlamePower < 0 || type != BURNING_HOUSE) {
 		flamePower = 0;
-	} else if (nextFlamePower > 0) {
+	} else if (nextFlamePower > 0)
 		flamePower = nextFlamePower;
-		std::cout << "xy: " << pos[X] << " " << pos[Y] << "Flame: " << flamePower << std::endl;
-	}
 }
 
 void House::setNextType(const MAP_TILE &type)

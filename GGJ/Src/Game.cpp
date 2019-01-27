@@ -157,6 +157,5 @@ void Game::update()
 		round();
 	}
 }
-//termPrintMap();
 
 void Game::destroy(){}

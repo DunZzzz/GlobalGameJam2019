@@ -15,8 +15,6 @@ Tiles::Tiles(Game *game, uint16_t *xy, MAP_TILE type)
 {
 	size[X] = 64;
 	size[Y] = 64;
-	//size[Y] = ((float)game->size[Y] / (float)game->mapPreset->xy[Y]);
-	std::cout << "size[X]" << size[X] << std::endl;
 	pos[X] = size[X] * xy[X];
 	pos[Y] = size[Y] * xy[Y];
 

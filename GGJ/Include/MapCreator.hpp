@@ -47,5 +47,8 @@ class MapCreator
 		std::shared_ptr<MapPreset> map1();
 		std::shared_ptr<MapPreset> map2();
 		std::shared_ptr<MapPreset> map3();
+		std::shared_ptr<MapPreset> map4();
+		std::shared_ptr<MapPreset> map5();
+		std::shared_ptr<MapPreset> map6();
 };
 
